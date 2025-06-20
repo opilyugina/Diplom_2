@@ -1,0 +1,94 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Gradle
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+.gradle/
+
+### IDE Specific ###
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+### System Files ###
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+### Compiled Files ###
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
+
+### Archives ###
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.7z
+
+### Logs and databases ###
+*.log
+*.cache
+*.sqlite
+*.db
+*.sql
+*.h2.db
+
+### Dependency directories ###
+jspm_packages/
+node_modules/
+bower_components/
+
+### Environment files ###
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+### Testing ###
+coverage/
+*.lcov
+
+### Documentation ###
+site/
+docs/_build/
+
+### OS generated ###
+ehthumbs.db
+[Tt]humbs.db
+*.stackdump
+/.idea/
