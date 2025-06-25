@@ -23,10 +23,19 @@ public class LoginUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Логин с невалидными данными")
-    @Description("Проверяем, что если указать несуществующий email и/или пароль, возвращается ошибка 401")
-    public void loginWithInvalidCredentialsTest() {
-        Credentials creds = new Credentials("wrong@mail.com", "wrongpass");
+    @DisplayName("Логин с неверным email")
+    @Description("Проверяем, что при неправильном email возвращается ошибка 401")
+    public void loginWithWrongEmailTest() {
+        Credentials creds = new Credentials("wrong@mail.com", user.getPassword());
+        Response response = userClient.login(creds);
+        assertEquals(SC_UNAUTHORIZED, response.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Логин с неверным паролем")
+    @Description("Проверяем, что при неправильном пароле возвращается ошибка 401")
+    public void loginWithWrongPasswordTest() {
+        Credentials creds = new Credentials(user.getEmail(), "wrongpassword");
         Response response = userClient.login(creds);
         assertEquals(SC_UNAUTHORIZED, response.getStatusCode());
     }

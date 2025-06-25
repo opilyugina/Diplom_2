@@ -1,7 +1,9 @@
 package stellarburgers.base;
 
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.qameta.allure.Step;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -9,16 +11,15 @@ import stellarburgers.model.Order;
 import stellarburgers.client.UserClient;
 import stellarburgers.model.Credentials;
 import stellarburgers.model.User;
-import io.qameta.allure.Step;
 import stellarburgers.constants.Endpoints;
 
 import java.util.Collections;
-import java.util.UUID;
 
 public class BaseTest {
     protected final UserClient userClient = new UserClient();
     protected String accessToken;
     protected User user;
+    private static final Faker faker = new Faker();
 
     @BeforeClass
     public static void setUpClass() {
@@ -37,11 +38,11 @@ public class BaseTest {
 
     @Step("Генерация случайного пользователя")
     protected User generateRandomUser() {
-        String uuid = UUID.randomUUID().toString().substring(0, 8);
+        Faker faker = new Faker();
         return new User(
-                "user" + uuid + "@test.com",
-                "password" + uuid,
-                "User-" + uuid
+                faker.internet().emailAddress(),
+                faker.internet().password(8, 12),
+                faker.name().firstName()
         );
     }
 

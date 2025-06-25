@@ -11,7 +11,7 @@ import io.qameta.allure.junit4.DisplayName;
 import java.util.Collections;
 
 import static org.apache.http.HttpStatus.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @DisplayName("Создание заказа")
 public class CreateOrderTest extends BaseTest {
@@ -42,6 +42,8 @@ public class CreateOrderTest extends BaseTest {
         Order order = new Order(Collections.emptyList());
         Response response = orderClient.create(order, accessToken);
         assertEquals(SC_BAD_REQUEST, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("Ingredient ids must be provided", message);
     }
 
     @Test

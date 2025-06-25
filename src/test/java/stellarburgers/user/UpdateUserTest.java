@@ -22,6 +22,12 @@ public class UpdateUserTest extends BaseTest {
         User updatedUser = new User("new@mail.com", "newpass", "NewName");
         Response response = userClient.updateUser(accessToken, updatedUser);
         assertEquals(SC_OK, response.getStatusCode());
+
+        String actualEmail = response.jsonPath().getString("user.email");
+        String actualName = response.jsonPath().getString("user.name");
+
+        assertEquals(updatedUser.getEmail().toLowerCase(), actualEmail.toLowerCase());
+        assertEquals(updatedUser.getName(), actualName);
     }
 
     @Test

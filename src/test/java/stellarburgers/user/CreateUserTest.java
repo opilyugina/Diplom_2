@@ -40,11 +40,29 @@ public class CreateUserTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("Создание пользователя без обязательного поля")
-    @Description("Проверяем, что если не указать обязательное поле (email), возвращается ошибка 400")
-    public void createUserWithoutRequiredFieldTest() {
+    @DisplayName("Создание пользователя без email")
+    @Description("Проверяем, что если не указать email, возвращается ошибка 403")
+    public void createUserWithoutEmailTest() {
         testUser = new User(null, "password", "Name");
         Response response = userClient.register(testUser);
-        assertEquals(SC_BAD_REQUEST, response.getStatusCode());
+        assertEquals(SC_FORBIDDEN, response.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Создание пользователя без имени")
+    @Description("Проверяем, что если не указано имя, возвращается ошибка 403")
+    public void createUserWithoutNameTest() {
+        testUser = new User("email@mail.com", "password", null);
+        Response response = userClient.register(testUser);
+        assertEquals(SC_FORBIDDEN, response.getStatusCode());
+    }
+
+    @Test
+    @DisplayName("Создание пользователя без пароля")
+    @Description("Проверяем, что если не указан пароль, возвращается ошибка 403")
+    public void createUserWithoutPasswordTest() {
+        testUser = new User("email@mail.com", null, "Name");
+        Response response = userClient.register(testUser);
+        assertEquals(SC_FORBIDDEN, response.getStatusCode());
     }
 }
