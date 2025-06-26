@@ -29,6 +29,8 @@ public class LoginUserTest extends BaseTest {
         Credentials creds = new Credentials("wrong@mail.com", user.getPassword());
         Response response = userClient.login(creds);
         assertEquals(SC_UNAUTHORIZED, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("email or password are incorrect", message);
     }
 
     @Test
@@ -38,5 +40,7 @@ public class LoginUserTest extends BaseTest {
         Credentials creds = new Credentials(user.getEmail(), "wrongpassword");
         Response response = userClient.login(creds);
         assertEquals(SC_UNAUTHORIZED, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("email or password are incorrect", message);
     }
 }

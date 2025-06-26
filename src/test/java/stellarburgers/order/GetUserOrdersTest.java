@@ -32,5 +32,7 @@ public class GetUserOrdersTest extends BaseTest {
     public void getUserOrdersWithoutAuthTest() {
         Response response = orderClient.getAll("");
         assertEquals(SC_UNAUTHORIZED, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("You should be authorised", message);
     }
 }

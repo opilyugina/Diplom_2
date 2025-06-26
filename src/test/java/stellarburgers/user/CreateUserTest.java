@@ -37,6 +37,8 @@ public class CreateUserTest extends BaseTest {
 
         Response secondResponse = userClient.register(testUser);
         assertEquals(SC_FORBIDDEN, secondResponse.getStatusCode());
+        String message = secondResponse.jsonPath().getString("message");
+        assertEquals("User already exists", message);
     }
 
     @Test
@@ -46,6 +48,8 @@ public class CreateUserTest extends BaseTest {
         testUser = new User(null, "password", "Name");
         Response response = userClient.register(testUser);
         assertEquals(SC_FORBIDDEN, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("Email, password and name are required fields", message);
     }
 
     @Test
@@ -55,6 +59,8 @@ public class CreateUserTest extends BaseTest {
         testUser = new User("email@mail.com", "password", null);
         Response response = userClient.register(testUser);
         assertEquals(SC_FORBIDDEN, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("Email, password and name are required fields", message);
     }
 
     @Test
@@ -64,5 +70,7 @@ public class CreateUserTest extends BaseTest {
         testUser = new User("email@mail.com", null, "Name");
         Response response = userClient.register(testUser);
         assertEquals(SC_FORBIDDEN, response.getStatusCode());
+        String message = response.jsonPath().getString("message");
+        assertEquals("Email, password and name are required fields", message);
     }
 }

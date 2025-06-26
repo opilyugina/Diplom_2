@@ -92,3 +92,4 @@ ehthumbs.db
 [Tt]humbs.db
 *.stackdump
 /.idea/
+.allure/
