@@ -19,7 +19,12 @@ public class UpdateUserTest extends BaseTest {
     @DisplayName("Изменение данных пользователя с авторизацией")
     @Description("Проверяем, что авторизованный пользователь может изменить любые свои данные")
     public void updateUserWithAuthTest() {
-        User updatedUser = new User("new@mail.com", "newpass", "NewName");
+        User updatedUser = new User(
+                faker.internet().emailAddress(),
+                faker.internet().password(8, 12),
+                faker.name().firstName()
+        );
+
         Response response = userClient.updateUser(accessToken, updatedUser);
         assertEquals(SC_OK, response.getStatusCode());
 
@@ -29,6 +34,7 @@ public class UpdateUserTest extends BaseTest {
         assertEquals(updatedUser.getEmail().toLowerCase(), actualEmail.toLowerCase());
         assertEquals(updatedUser.getName(), actualName);
     }
+
 
     @Test
     @DisplayName("Изменение данных пользователя без авторизации")

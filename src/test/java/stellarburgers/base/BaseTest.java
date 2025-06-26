@@ -19,7 +19,7 @@ public class BaseTest {
     protected final UserClient userClient = new UserClient();
     protected String accessToken;
     protected User user;
-    private static final Faker faker = new Faker();
+    protected  static final Faker faker = new Faker();
 
     @BeforeClass
     public static void setUpClass() {
